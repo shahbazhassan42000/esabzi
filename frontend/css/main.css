@@ -1,0 +1,29 @@
+:root{
+    --primary-color: #8bc543;
+    --secondary-color: #638c28;
+    --tertiary-color: #f6972f;
+    --quaternary-color:#ffc700;
+    --red-color: #FF0000;
+}
+.primary-btn{
+    cursor: pointer !important;
+    background-color: var(--primary-color) !important;
+    color:#FFFFFF !important;
+    padding: 0.5rem 2rem !important;
+    border-radius: 1.5rem !important;
+}
+.primary-btn:hover,
+.primary-btn:focus {
+    animation: pulse 1s;
+    box-shadow: 0 0 0 2em transparent;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 var(--primary-color); }
+}
+.primary-btn:active {
+    box-shadow: 0 0.125em 0.125em -0.1em var(--secondary-color) !important;
+    transform: translateY(0.125em);
+}
+.light-shadow{
+    box-shadow:0 0 30px -2px rgba(0,0,0,0.35);
+}
