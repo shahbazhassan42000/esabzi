@@ -28,7 +28,7 @@
             </div>
             <h1 class="text-[#8bc543] text-4xl font-bold">LOGIN</h1>
             <!-- login form -->
-            <form action="#" id="login_form" class="flex flex-col items-center gap-10 pt-10" method="POST">
+            <form action="#" id="login_form" class="relative flex flex-col items-center gap-10 pt-10" method="POST">
                 <div class="flex gap-4 justify-between ">
 
                     <!-- add circle user icon font awesome -->
@@ -42,9 +42,16 @@
                     <!-- add eye icon font awesome -->
                     <i class="cursor-pointer fa-solid fa-eye absolute right-14 text-2xl mt-1 text-[#8bc543]" id="pwd_toggle_btn"></i>
                 </div>
-                <input class="primary-btn text-2xl font-bold" type="submit" id="login_btn" value="Log In">
+                <label id="msg" class="hidden text-[#FF0000]"></label>
+                <input class="primary-btn text-2xl font-bold" disabled type="submit" id="login_btn" value="Log In">
                 <div>
                     Doesn't have an account yet? <a href="signup.html" class="text-[#8bc543] hover:text-[#638c28] font-bold">Sign Up</a>
+                </div>
+                <!-- loading animation -->
+                <div class="backdrop-blur-sm w-full h-full absolute flex justify-center">
+                    <div class="h-30 w-30 mt-[40px]">
+                        <img src="images/loader.gif" alt="loading animation" class="h-full w-full object-fit">
+                    </div>
                 </div>
             </form>
 

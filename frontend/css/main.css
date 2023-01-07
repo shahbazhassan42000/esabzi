@@ -5,22 +5,32 @@
     --quaternary-color:#ffc700;
     --red-color: #FF0000;
 }
-.primary-btn{
-    cursor: pointer !important;
-    background-color: var(--primary-color) !important;
-    color:#FFFFFF !important;
-    padding: 0.5rem 2rem !important;
-    border-radius: 1.5rem !important;
+body .primary-btn{
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color:#FFFFFF;
+    padding: 0.5rem 2rem;
+    border-radius: 1.5rem;
 }
-.primary-btn:hover,
-.primary-btn:focus {
+body .primary-btn:hover,
+body .primary-btn:focus {
     animation: pulse 1s;
     box-shadow: 0 0 0 2em transparent;
+}
+body .primary-btn:disabled{
+    cursor: not-allowed;
+    background-color: var(--secondary-color);
+}
+/*    disabled hover effect when button is disabled*/
+body .primary-btn:disabled:hover,
+body .primary-btn:disabled:focus {
+    animation: none;
+    box-shadow: none;
 }
 @keyframes pulse {
     0% { box-shadow: 0 0 0 0 var(--primary-color); }
 }
-.primary-btn:active {
+body .primary-btn:active {
     box-shadow: 0 0.125em 0.125em -0.1em var(--secondary-color) !important;
     transform: translateY(0.125em);
 }

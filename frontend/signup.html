@@ -16,7 +16,7 @@
 <body class="flex font-['rubik']">
     <!-- background picture -->
     <section class="w-[40%] h-screen" >
-        <img src="images/carrot_hi.gif" class="w-full h-full object-cover">
+        <img src="images/carrot_hi.gif" alt="carrot waving hi" class="w-full h-full object-cover">
     </section>
     <section class="w-[60%] h-screen">
         <!-- box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px; -->
@@ -24,13 +24,15 @@
         <div class="relative mt-[15vh] light-shadow bg-white -ml-28 rounded p-[50px] pt-[80px] border-2 w-fit">
             <!-- Welcome E-Sabzi box -->
             <div class="bg-[#8bc543] absolute -right-8 -top-8 rounded rounded-br-[35px]">
-                <h1 class="text-white text-4xl p-5 pt-10 font-bold">Welcome</br>to E-Sabzi</h1>
+                <h1 class="text-white text-4xl p-5 pt-10 font-bold">Welcome<br/>to E-Sabzi</h1>
             </div>
             <h1 class="text-[#8bc543] text-4xl font-bold">SIGNUP</h1>
             <!-- signup form -->
             <form action="#" id="login_form" class="flex flex-col items-center gap-10 pt-10" method="POST">
-                <div class="flex gap-4 justify-between ">
+                <div class="select-none">
 
+                </div>
+                <div class="flex gap-4 justify-between">
                     <!-- add circle user icon font awesome -->
                     <i class=" fas fa-user-circle text-[#8bc543] text-3xl mt-2"></i>
                     <input id="username" class="border-b outline-none border-[#8bc543] p-2 w-[400px]" type="text" name="username" placeholder="Username" required>
