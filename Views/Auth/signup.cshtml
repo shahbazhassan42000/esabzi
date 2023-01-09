@@ -1,22 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
-    <!-- Rubik font -->
-    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
-    <!-- fontawesome css cdn -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- tailwind css cdn -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>E-Sabzi</title>
-    <script src="js/auth.js"></script>
-    <link href="css/main.css" rel="stylesheet">
-</head>
+@using esabzi
+@using esabzi.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/js/auth.js"></script>
+<link href="~/css/auth.css" rel="stylesheet">
+
 <body class="flex font-['rubik']">
     <!-- background picture -->
     <section class="w-[40%] h-screen" >
-        <img src="images/carrot_hi.gif" alt="carrot waving hi" class="w-full h-full object-cover">
+        <img src="~/images/carrot_hi.gif" alt="carrot waving hi" class="w-full h-full object-cover">
     </section>
     <section class="w-[60%] h-screen flex items-center">
         <!-- box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px; -->
@@ -45,12 +38,12 @@
                 <label id="msg" class="text-[#FF0000] invisible m-0 p-0">ERROR</label>
                 <input class="primary-btn text-2xl font-bold" disabled type="submit"  id="signup_btn" value="Sign Up">
                 <div>
-                    Already have an account?? <a href="login.html" class="text-[#8bc543] hover:text-[#638c28] font-bold">Log In</a>
+                    Already have an account?? <a class="text-[#8bc543] hover:text-[#638c28] font-bold" asp-controller="Auth" asp-action="Login">Log In</a>
                 </div>
                 <!-- loading animation -->
                 <div id="loader" class="hidden backdrop-blur-sm w-full h-full absolute justify-center">
                     <div class="h-[200px]">
-                        <img src="images/loader.gif" alt="loading animation" class="h-full w-full object-fit">
+                        <img src="~/images/loader.gif" alt="loading animation" class="h-full w-full object-fit">
                     </div>
                 </div>
             </form>
@@ -58,4 +51,3 @@
         </div>
     </section>
 </body>
-</html>

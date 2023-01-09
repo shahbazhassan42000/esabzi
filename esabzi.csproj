@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Home\login.cshtml" />
+    <Content Remove="Views\Home\signup.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Auth\login.cshtml" />
+    <None Include="Views\Auth\signup.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="wwwroot\images\carrot_hi.gif" />
+    <None Include="wwwroot\images\dancing_carrot.gif" />
+    <None Include="wwwroot\images\disco_carrot_backup.gif" />
+    <None Include="wwwroot\images\loader-2.gif" />
+    <None Include="wwwroot\images\loader-3.gif" />
+    <None Include="wwwroot\images\loader-4.gif" />
+    <None Include="wwwroot\images\loader-5.gif" />
+    <None Include="wwwroot\images\loader.gif" />
+    <None Include="wwwroot\css\auth.css" />
+    <None Include="wwwroot\js\auth.js" />
+  </ItemGroup>
+
+</Project>

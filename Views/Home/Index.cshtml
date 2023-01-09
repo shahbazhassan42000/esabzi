@@ -1,0 +1,15 @@
+@using esabzi
+@using esabzi.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body>
+    <!-- create a sign-in page -->
+<nav>
+	<ul>
+        <li><a asp-controller="Auth" asp-action="Login">Login</a></li>
+        <li><a asp-controller="Auth" asp-action="Signup">Signup</a></li>
+	</ul>
+</nav>
+</body>

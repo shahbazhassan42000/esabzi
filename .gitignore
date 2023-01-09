@@ -1,3 +1,5 @@
 .idea
 *.iml
 .vs
+/bin/Debug/net6.0
+obj/*
