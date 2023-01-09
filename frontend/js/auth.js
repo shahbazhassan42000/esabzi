@@ -25,7 +25,7 @@ window.addEventListener("load", () => {
     //login page functions
     if (login_form) {
         //disable login button if username or password is empty
-        login_form.addEventListener("input", (event) => {
+        login_form.addEventListener("input", () => {
             login_btn.disabled = !(username_inp.value.trim() && password_inp.value.trim());
             username_inp.style.borderColor = username_inp.value.trim() === "" ? "#FF0000" : "#8bc543";
             password_inp.style.borderColor = password_inp.value.trim() === "" ? "#FF0000" : "#8bc543";
@@ -54,6 +54,7 @@ window.addEventListener("load", () => {
                 .then(data => {
                         console.log("response: ", data);
                         if (data.success) {
+                            //TODO: save AWT token in local storage
                             //display success message for 3 seconds
                             show_msg("Login successful", "success", 5000);
                             login_form.reset();
@@ -88,7 +89,7 @@ window.addEventListener("load", () => {
         })();
 
         //disable signup button if any of the input is empty
-        signup_form.addEventListener("input", (event) => {
+        signup_form.addEventListener("input", () => {
             signup_btn.disabled = !(name_inp.value.trim() && validate_email() && validate_contact() && validate_username() && validate_password() && address_inp.value.trim());
             name_inp.style.borderColor = name_inp.value.trim() === "" ? "#FF0000" : "#8bc543";
             email_inp.style.borderColor = validate_email() ? "#8bc543" : "#FF0000";
