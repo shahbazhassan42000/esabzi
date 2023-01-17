@@ -9,12 +9,15 @@
   <ItemGroup>
     <Content Remove="Views\Home\login.cshtml" />
     <Content Remove="Views\Home\signup.cshtml" />
+    <Content Remove="wwwroot\css\main.css" />
+    <Content Remove="wwwroot\js\main.js" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Views\Auth\login.cshtml" />
     <None Include="Views\Auth\signup.cshtml" />
-    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_AuthLayout.cshtml" />
+    <None Include="wwwroot\css\main.css" />
     <None Include="wwwroot\images\carrot_hi.gif" />
     <None Include="wwwroot\images\dancing_carrot.gif" />
     <None Include="wwwroot\images\disco_carrot_backup.gif" />
@@ -24,6 +27,7 @@
     <None Include="wwwroot\images\loader-5.gif" />
     <None Include="wwwroot\images\loader.gif" />
     <None Include="wwwroot\css\auth.css" />
+    <None Include="wwwroot\js\main.js" />
     <None Include="wwwroot\js\auth.js" />
   </ItemGroup>
 

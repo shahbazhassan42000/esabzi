@@ -8,6 +8,7 @@ namespace esabzi.Controllers
     {
         public ViewResult Index()
         {
+            ViewBag.title = "E-Sabzi";
             return View();
         }
     }

@@ -1,0 +1,39 @@
+:root{
+    --primary-color: #8bc543;
+    --secondary-color: #638c28;
+    --tertiary-color: #f6972f;
+    --quaternary-color:#ffc700;
+    --red-color: #FF0000;
+}
+body .primary-btn{
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color:#FFFFFF;
+    padding: 0.5rem 2rem;
+    border-radius: 1.5rem;
+}
+body .primary-btn:hover,
+body .primary-btn:focus {
+    animation: pulse 1s;
+    box-shadow: 0 0 0 2em transparent;
+}
+body .primary-btn:disabled{
+    cursor: not-allowed;
+    background-color: var(--secondary-color);
+}
+/*    disabled hover effect when button is disabled*/
+body .primary-btn:disabled:hover,
+body .primary-btn:disabled:focus {
+    animation: none;
+    box-shadow: none;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 var(--primary-color); }
+}
+body .primary-btn:active {
+    box-shadow: 0 0.125em 0.125em -0.1em var(--secondary-color) !important;
+    transform: translateY(0.125em);
+}
+.light-shadow{
+    box-shadow:0 0 30px -2px rgba(0,0,0,0.35);
+}
