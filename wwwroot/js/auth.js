@@ -1,12 +1,10 @@
 window.addEventListener("load", () => {
     const backendURL = "http://localhost:8080";
     const usersURL = "auth/users";
-    const loginURL = 'auth/login';
-    const signupURL = 'auth/signup';
+    const loginURL = 'auth/users/login';
 
     const patterns = {
-        email: /^([a-z\d]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
-        contact: /^(\+92)(3)([0-9]{9})$/,
+        email: /^([a-z\d]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/, contact: /^(\+92)(3)([0-9]{9})$/,
     };
     let users = [];
     const pwd_toggle_btn = document.getElementById("pwd_toggle_btn");
@@ -36,40 +34,32 @@ window.addEventListener("load", () => {
         //login form submit
         login_form.addEventListener("submit", (e) => {
             e.preventDefault();
-            const username = username_inp.value;
-            const password = password_inp.value;
+            const Username = username_inp.value;
+            const Password = password_inp.value;
             const data = {
-                username,
-                password
+                Username, Password
             };
             login_btn.disabled = true;
             loader.style.display = "flex";
             console.log("request load: ", data);
-            fetch(backendURL + loginURL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            }).then(res => res.json())
-                .then(data => {
-                        console.log("response: ", data);
-                        if (data.success) {
-                            //TODO: save AWT token in local storage
-                            //display success message for 3 seconds
-                            show_msg("Login successful", "success", 5000);
-                            login_form.reset();
-                            window.location.href = "/";
-                        } else {
-                            login_btn.disabled = false;
-                            show_msg("Invalid Credentials", "error", 5000);
-                        }
-                        loader.style.display = "none";
+            axios.post(`${backendURL}/${loginURL}`, data)
+            .then(res => {
+                    console.log("response: ", res);
+                if (res.status === 200) {
+                        //TODO: save AWT token in local storage
+                        //display success message for 3 seconds
+                        show_msg("Login successful", "success", 5000);
+                        login_form.reset();
+                        window.location.href = "/";
+                    } else {
+                        login_btn.disabled = false;
+                        show_msg("Invalid Credentials", "error", 5000);
                     }
-                )
+                    loader.style.display = "none";
+                })
                 .catch(err => {
                     login_btn.disabled = false;
-                    show_msg("ERROR!!! While login, Please try again", "error", 5000);
+                    show_msg(err.response.status === 401 || err.response.status === 422 ? "Invalid Credentials" : "ERROR!!! While login, Please try again", "error", 5000);
                     console.log(err);
                     loader.style.display = "none";
                 });
@@ -79,17 +69,17 @@ window.addEventListener("load", () => {
     if (signup_form) {
         //get all usernames
         (() => {
-            axios.get(backendURL +"/"+ usersURL)
+            axios.get(backendURL + "/" + usersURL)
                 .then(res => {
-                    if (res.status==200) {
+                    if (res.status === 200) {
                         users = res.data; //arrays of users
                         console.log(users);
                     } else {
                         console.log("ERROR");
                     }
-                  
-                 })
-                 .catch(err => console.log(err.message));
+
+                })
+                .catch(err => console.log(err.message));
         })();
 
         //disable signup button if any of the input is empty
@@ -130,7 +120,7 @@ window.addEventListener("load", () => {
                 return false;
             }
         }
-        
+
         const validate_username = () => {
             if (username_inp.value.trim() === "") return false;
             //check if username is already taken
@@ -156,42 +146,35 @@ window.addEventListener("load", () => {
         //signup form submit
         signup_form.addEventListener("submit", (e) => {
             e.preventDefault();
-            const name = name_inp.value;
-            const email = email_inp.value;
-            const contact = contact_inp.value;
-            const username = username_inp.value;
-            const password = password_inp.value;
-            const address = address_inp.value;
+            const Name = name_inp.value;
+            const Email = email_inp.value;
+            const ContactNo = contact_inp.value;
+            const Username = username_inp.value;
+            const Password = password_inp.value;
+            const Address = address_inp.value;
             const data = {
-                name,
-                email,
-                contact,
-                username,
-                password,
-                address
+                Name, Email, ContactNo, Username, Password, Address
             };
             signup_btn.disabled = true;
             loader.style.display = "flex";
             console.log("request load: ", data);
-            axios.post(backendURL +"/" + signupURL, data)
-            .then(res => res.json())
-                .then(data => {
-                        console.log("response: ", data);
-                        if (data.success) {
-                            //display success message for 3 seconds
-                            show_msg("Signup successful", "success", 5000);
-                            signup_form.reset();
-                            window.location.href = "/login";
-                        } else {
-                            signup_btn.disabled = false;
-                            show_msg("Invalid Information", "error", 5000);
-                        }
-                        loader.style.display = "none";
+            axios.post(backendURL + "/" + usersURL, data)
+                .then(res => {
+                    console.log("response: ", res);
+                    if (res.status === 200) {
+                        //display success message for 3 seconds
+                        show_msg("Signup successful", "success", 5000);
+                        signup_form.reset();
+                        window.location.href = "/";
+                    } else {
+                        signup_btn.disabled = false;
+                        show_msg("Invalid Information", "error", 5000);
                     }
-                )
+                    loader.style.display = "none";
+                })
                 .catch(err => {
                     signup_btn.disabled = false;
-                    show_msg("ERROR!!! While signup, Please try again", "error", 5000);
+                    show_msg(err.response.status === 422 ? "Invalid Information" :"ERROR!!! While signup, Please try again", "error", 5000);
                     console.log(err);
                     loader.style.display = "none";
                 });

@@ -21,7 +21,11 @@ CREATE TABLE [user] (
 )
 GO
 
+--reseting user table
+TRUNCATE TABLE [user];
+GO
+
 -- Insert the admin user
-INSERT INTO [user] (name, email, contact_no, username, password, address)
-VALUES ('Shahbaz','shahbazhassan42000@gmail.com','+923354058294','shahbaz','$2a$11$Z1z0YAwuK/Iln4i2c/o93.vvBfvvx6wicVkcS9a1XFDMM4w/Inw9e','https://i.ibb.co/x3nt3dc/Shahbaz.jpg');
+INSERT INTO [user] (name, email, contact_no, username, password, address,picture)
+VALUES ('Shahbaz','shahbazhassan42000@gmail.com','+923354058294','shahbaz','$2a$11$Z1z0YAwuK/Iln4i2c/o93.vvBfvvx6wicVkcS9a1XFDMM4w/Inw9e','Street #3, House #22, Hajveri Mohala, Shishmahal road near Takiya Sardar Shah, Data Darbar','https://i.ibb.co/x3nt3dc/Shahbaz.jpg');
 GO
