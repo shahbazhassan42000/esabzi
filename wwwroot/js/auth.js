@@ -46,16 +46,15 @@ window.addEventListener("load", () => {
             .then(res => {
                     console.log("response: ", res);
                 if (res.status === 200) {
-                        //TODO: save AWT token in local storage
-                        //display success message for 3 seconds
-                        show_msg("Login successful", "success", 5000);
-                        login_form.reset();
-                        window.location.href = "/";
-                    } else {
-                        login_btn.disabled = false;
-                        show_msg("Invalid Credentials", "error", 5000);
-                    }
-                    loader.style.display = "none";
+                    localStorage.setItem("token", res.data.token);
+                    show_msg("Login successful", "success", 5000);
+                    login_form.reset();
+                    window.location.href = "/";
+                } else {
+                    login_btn.disabled = false;
+                    show_msg("Invalid Credentials", "error", 5000);
+                }
+                loader.style.display = "none";  
                 })
                 .catch(err => {
                     login_btn.disabled = false;

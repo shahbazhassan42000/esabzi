@@ -48,14 +48,14 @@ public partial class User
         };
 
         //creating security key
-        SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("Jwt-Key").Value));
+        SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
 
         //creating signed credentials
         SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         //generating token
-        JwtSecurityToken token = new JwtSecurityToken(config["Issuer"],
-          config["Issuer"],
+        JwtSecurityToken token = new JwtSecurityToken(config["Jwt:Issuer"],
+          config["Jwt:Issuer"],
           claims,
           expires: DateTime.Now.AddMonths(1),
           signingCredentials: creds);

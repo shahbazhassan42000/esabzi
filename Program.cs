@@ -6,7 +6,7 @@ builder.Services.AddControllersWithViews();
 // configure the appsetting.json file by registering the
 // IConfiguration service with the dependency injection container
 builder.Services.AddSingleton<IConfiguration>(new ConfigurationBuilder()
-    .AddJsonFile("appsetting.json", true, true)
+    .AddJsonFile("appsettings.json", true, true)
     .Build());
 
 var app = builder.Build();

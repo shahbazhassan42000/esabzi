@@ -1,4 +1,8 @@
 {
+  "Jwt": {
+    "Key": "$2a$11$Z1z0YAwuK/Iln4i2c/o93.vvBfvvx6wicVkcS9a1XFDMM4w/Inw9e",
+    "Issuer": "E-SABZI"
+  },
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
