@@ -1,5 +1,3 @@
-@using esabzi
-@using esabzi.Models
 @{
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
@@ -8,8 +6,8 @@
     <!-- create a sign-in page -->
 <nav>
 	<ul style="flex">
-        <li><a asp-controller="Auth" asp-action="Login">Login</a></li>
-        <li><a asp-controller="Auth" asp-action="Signup">Signup</a></li>
+        <li><a href="/auth/login" asp-controller="Auth" asp-action="Login">Login</a></li>
+        <li><a href="/auth/signup" asp-controller="Auth" asp-action="Signup">Signup</a></li>
 	</ul>
 </nav>
 </body>

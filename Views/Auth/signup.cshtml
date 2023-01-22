@@ -17,13 +17,18 @@
         <h1 class="text-[#8bc543] text-4xl font-bold">SIGNUP</h1>
         <!-- signup form -->
         <form action="#" id="signup_form" class="flex flex-col items-center pt-5" method="POST">
+            <!-- name input -->
             <input id="name" name="name" class="border-b outline-none border-[#8bc543] p-2 w-[400px]" type="text" placeholder="Name" required>
+            <!-- email input -->
             <input id="email" name="email" class="border-b mt-[21px] outline-none border-[#8bc543] p-2 w-[400px]" type="email" placeholder="Email" required>
             <label class="error-msg m-0 text-[#FF0000] invisible self-start text-[0.9em]">Email should be valid, e.g. me@mydomain.com</label>
+            <!-- contact number input -->
             <input id="contact" name="contact" class="border-b outline-none border-[#8bc543] p-2 w-[400px]" type="text" placeholder="Contact" required>
             <label class="error-msg m-0 text-[#FF0000] invisible self-start text-[0.9em]">Contact should be valid, e.g. <+923xzyyyyyyy></label>
+            <!-- username input -->
             <input id="username" class="border-b outline-none border-[#8bc543] p-2 w-[400px]" type="text" name="username" placeholder="Username" required>
             <label class="error-msg m-0 text-[#FF0000] invisible self-start text-[0.9em]">Username already taken</label>
+            <!-- password input -->
             <div class="flex flex-col">
                 <input class="relative border-b outline-none border-[#8bc543] p-2 w-[400px]" id="password" type="password" minlength="8" name="password" placeholder="Password" required>
                 <label class="error-msg m-0 text-[#FF0000] invisible self-start text-[0.9em]">Password should be at least 8 characters</label>
@@ -32,9 +37,9 @@
             </div>
             <textarea id="address" class="border-b outline-none border-[#8bc543] p-2 pt-0 w-[400px] resize-none" name="address" placeholder="Address" required></textarea>
             <label id="msg" class="text-[#FF0000] invisible m-0 p-0">ERROR</label>
-            <input class="primary-btn text-2xl font-bold" disabled type="submit" id="signup_btn" value="Sign Up">
+            <input class="primary-btn text-2xl font-bold mb-5" disabled type="submit" id="signup_btn" value="Sign Up">
             <div>
-                Already have an account?? <a class="text-[#8bc543] hover:text-[#638c28] font-bold" asp-controller="Auth" asp-action="Login">Log In</a>
+                Already have an account?? <a href="/auth/login" class="text-[#8bc543] hover:text-[#638c28] font-bold" asp-controller="Auth" asp-action="Login">Log In</a>
             </div>
             <!-- loading animation -->
             <div id="loader" class="hidden backdrop-blur-sm w-full h-full absolute justify-center">

@@ -1,5 +1,3 @@
-@using esabzi
-@using esabzi.Models
 @{
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
@@ -33,7 +31,7 @@
             <label id="msg" class="invisible text-[#FF0000] my-[-17px]">ERROR</label>
             <input class="primary-btn text-2xl font-bold" disabled type="submit" id="login_btn" value="Log In">
             <div>
-                Doesn't have an account yet? <a class="text-[#8bc543] hover:text-[#638c28] font-bold" asp-controller="Auth" asp-action="Signup">Sign Up</a>
+                Doesn't have an account yet? <a href="/auth/signup" class="text-[#8bc543] hover:text-[#638c28] font-bold" asp-controller="Auth" asp-action="Signup">Sign Up</a>
             </div>
             <!-- loading animation -->
             <div id="loader" class="hidden backdrop-blur-sm w-full h-full absolute justify-center">

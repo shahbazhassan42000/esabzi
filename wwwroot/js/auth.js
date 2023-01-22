@@ -1,13 +1,14 @@
 window.addEventListener("load", () => {
-    const backendURL = "http://localhost:3000";
-    const loginURL = '/api/v0.1/auth/login';
-    const signupURL = '/api/v0.1/auth/signup';
+    const backendURL = "http://localhost:8080";
+    const usersURL = "auth/users";
+    const loginURL = 'auth/login';
+    const signupURL = 'auth/signup';
 
     const patterns = {
         email: /^([a-z\d]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
         contact: /^(\+92)(3)([0-9]{9})$/,
     };
-    let usernames = [];
+    let users = [];
     const pwd_toggle_btn = document.getElementById("pwd_toggle_btn");
     const name_inp = document.getElementById("name");
     const email_inp = document.getElementById("email");
@@ -78,14 +79,17 @@ window.addEventListener("load", () => {
     if (signup_form) {
         //get all usernames
         (() => {
-            //TODO: get all usernames from backend
-            // fetch(backendURL + '/api/v0.1/all_usernames')
-            //     .then(res => res.json())
-            //     .then(data => {
-            //         usernames = data;
-            //         console.log(usernames);
-            //     })
-            //     .catch(err => console.log(err));
+            axios.get(backendURL +"/"+ usersURL)
+                .then(res => {
+                    if (res.status==200) {
+                        users = res.data; //arrays of users
+                        console.log(users);
+                    } else {
+                        console.log("ERROR");
+                    }
+                  
+                 })
+                 .catch(err => console.log(err.message));
         })();
 
         //disable signup button if any of the input is empty
@@ -99,16 +103,6 @@ window.addEventListener("load", () => {
             address_inp.style.borderColor = address_inp.value.trim() === "" ? "#FF0000" : "#8bc543";
         });
 
-        const validate_email = () => {
-            if (patterns.email.test(email_inp.value.trim())) {
-                email_inp.nextElementSibling.style.visibility = "hidden";
-                return true;
-            } else {
-                email_inp.nextElementSibling.style.visibility = "visible";
-                return false;
-            }
-        }
-
         const validate_contact = () => {
             if (patterns.contact.test(contact_inp.value.trim())) {
                 contact_inp.nextElementSibling.style.visibility = "hidden";
@@ -119,9 +113,28 @@ window.addEventListener("load", () => {
             }
         }
 
+        const validate_email = () => {
+            //check if email is already taken
+            if (patterns.email.test(email_inp.value.trim()) && !users.find(user => user.email === email_inp.value.trim())) {
+                email_inp.nextElementSibling.style.visibility = "hidden";
+                return true;
+            } else {
+                //if email is not valid then set invalid msg && if email already taken then set that message
+                if (!patterns.email.test(email_inp.value.trim())) {
+                    email_inp.nextElementSibling.innerText = "Email should be valid, e.g. me@mydomain.com";
+                }
+                if (users.find(user => user.email === email_inp.value.trim())) {
+                    email_inp.nextElementSibling.innerText = "Email already taken";
+                }
+                email_inp.nextElementSibling.style.visibility = "visible";
+                return false;
+            }
+        }
+        
         const validate_username = () => {
             if (username_inp.value.trim() === "") return false;
-            if (usernames.includes(username_inp.value.trim())) {
+            //check if username is already taken
+            if (users.find(user => user.username === username_inp.value.trim())) {
                 username_inp.nextElementSibling.style.visibility = "visible";
                 return false;
             } else {
@@ -160,13 +173,8 @@ window.addEventListener("load", () => {
             signup_btn.disabled = true;
             loader.style.display = "flex";
             console.log("request load: ", data);
-            fetch(backendURL + signupURL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            }).then(res => res.json())
+            axios.post(backendURL +"/" + signupURL, data)
+            .then(res => res.json())
                 .then(data => {
                         console.log("response: ", data);
                         if (data.success) {
