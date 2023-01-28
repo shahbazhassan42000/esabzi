@@ -1,7 +1,8 @@
 window.addEventListener("load", () => {
     const backendURL = "http://localhost:8080";
-    const usersURL = "auth/users";
-    const loginURL = 'auth/users/login';
+    const usersURL = "api/user";
+    const loginURL = 'login';
+    const signupURL = 'users';
 
     const patterns = {
         email: /^([a-z\d]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/, contact: /^(\+92)(3)([0-9]{9})$/,
@@ -42,11 +43,12 @@ window.addEventListener("load", () => {
             login_btn.disabled = true;
             loader.style.display = "flex";
             console.log("request load: ", data);
-            axios.post(`${backendURL}/${loginURL}`, data)
+            axios.post(`${backendURL}/${usersURL}/${loginURL}`, data)  //api/user/login
             .then(res => {
                     console.log("response: ", res);
                 if (res.status === 200) {
-                    localStorage.setItem("token", res.data.token);
+                    //store in cookies
+                    document.cookie = `token=${res.data.token}`;
                     show_msg("Login successful", "success", 5000);
                     login_form.reset();
                     window.location.href = "/";
@@ -58,7 +60,7 @@ window.addEventListener("load", () => {
                 })
                 .catch(err => {
                     login_btn.disabled = false;
-                    show_msg(err.response.status === 401 || err.response.status === 422 ? "Invalid Credentials" : "ERROR!!! While login, Please try again", "error", 5000);
+                    show_msg(err.response.status === 404 || err.response.status === 422 ? "Invalid Credentials" : "ERROR!!! While login, Please try again", "error", 5000);
                     console.log(err);
                     loader.style.display = "none";
                 });
@@ -68,7 +70,7 @@ window.addEventListener("load", () => {
     if (signup_form) {
         //get all usernames
         (() => {
-            axios.get(backendURL + "/" + usersURL)
+            axios.get(`${backendURL}/${usersURL}/usernames`)
                 .then(res => {
                     if (res.status === 200) {
                         users = res.data; //arrays of users
@@ -152,28 +154,28 @@ window.addEventListener("load", () => {
             const Password = password_inp.value;
             const Address = address_inp.value;
             const data = {
-                Name, Email, ContactNo, Username, Password, Address
+                Name, Email, ContactNo, Username, Password, Address, Role:"CUSTOMER"
             };
             signup_btn.disabled = true;
             loader.style.display = "flex";
             console.log("request load: ", data);
-            axios.post(backendURL + "/" + usersURL, data)
+            axios.post(`${backendURL}/${usersURL}/${signupURL}`, data) //api/user/users
                 .then(res => {
                     console.log("response: ", res);
                     if (res.status === 200) {
                         //display success message for 3 seconds
                         show_msg("Signup successful", "success", 5000);
                         signup_form.reset();
-                        window.location.href = "/";
+                        window.location.href = "/auth/login";
                     } else {
                         signup_btn.disabled = false;
-                        show_msg("Invalid Information", "error", 5000);
+                        show_msg("Please fill all the fields", "error", 5000);
                     }
                     loader.style.display = "none";
                 })
                 .catch(err => {
                     signup_btn.disabled = false;
-                    show_msg(err.response.status === 422 ? "Invalid Information" :"ERROR!!! While signup, Please try again", "error", 5000);
+                    show_msg(err.response.status === 422 ? "Please fill all the fields" :"ERROR!!! While signup, Please try again", "error", 5000);
                     console.log(err);
                     loader.style.display = "none";
                 });
@@ -187,12 +189,12 @@ window.addEventListener("load", () => {
     pwd_toggle_btn.addEventListener("click", () => {
         if (password_inp.type === "password") {
             password_inp.type = "text";
-            pwd_toggle_btn.classList.remove("fa-eye");
-            pwd_toggle_btn.classList.add("fa-eye-slash");
-        } else {
-            password_inp.type = "password";
             pwd_toggle_btn.classList.remove("fa-eye-slash");
             pwd_toggle_btn.classList.add("fa-eye");
+        } else {
+            password_inp.type = "password";
+            pwd_toggle_btn.classList.remove("fa-eye");
+            pwd_toggle_btn.classList.add("fa-eye-slash");
 
         }
     });

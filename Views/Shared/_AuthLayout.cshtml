@@ -12,11 +12,10 @@
     <title>@ViewBag.Title</title>
     <script src="~/js/auth.js"></script>
     <link href="~/css/auth.css" rel="stylesheet">
-    <!-- axios cdn -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body class="flex font-['rubik']">
     @RenderBody()
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
 

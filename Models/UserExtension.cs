@@ -1,67 +1,36 @@
-﻿using BCrypt.Net;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using bcrypt = BCrypt.Net.BCrypt;
-using System.Security.Claims;
+﻿using bcrypt=BCrypt.Net.BCrypt;
+using System.Net;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Text;
 
-namespace esabzi.Models;
-
-public partial class User
+namespace esabzi.Models
 {
-    //encrypt password
-    public void EncryptPassword()
+    public partial class User
     {
-        string salt = bcrypt.GenerateSalt();
-        Password = bcrypt.HashPassword(Password, salt);
-    }
 
-    //compare password
-    public bool ComparePassword(string password)
-    {
-        return bcrypt.Verify(password, Password);
-    }
-
-    //validate signup credentials
-    public bool ValidateSignup()
-    {
-        return Name != null && Email != null && ContactNo != null && Username != null && Password != null && Address != null;
-    }
-
-    //validate login credentials
-    public bool ValidateLogin()
-    {
-        return Username != null && Password != null;
-    }
-
-    //generate JWT token
-    public JwtSecurityToken GenerateJWT(IConfiguration config)
-    {
-        //creating claims to store in token
-        Claim[] claims = new[]
+        //encrypt password
+        public void EncryptPassword()
         {
-            new Claim(JwtRegisteredClaimNames.Sub, Username),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        };
 
-        //creating security key
-        SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
+            string salt = bcrypt.GenerateSalt();
+            Password = bcrypt.HashPassword(Password, salt);
+        }
 
-        //creating signed credentials
-        SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        //compare password
+        public bool ComparePassword(string password)
+        {
+            return bcrypt.Verify(password, Password);
+        }
 
-        //generating token
-        JwtSecurityToken token = new JwtSecurityToken(config["Jwt:Issuer"],
-          config["Jwt:Issuer"],
-          claims,
-          expires: DateTime.Now.AddMonths(1),
-          signingCredentials: creds);
+        //validate signup credentials
+        public bool ValidateSignup()
+        {
+            return !Name.IsNullOrEmpty() && !Email.IsNullOrEmpty() && !ContactNo.IsNullOrEmpty() && !Username.IsNullOrEmpty() && !Password.IsNullOrEmpty() && !Address.IsNullOrEmpty();
+        }
 
-        return token;
-
-
+        //validate login credentials
+        public bool ValidateLogin()
+        {
+            return !Username.IsNullOrEmpty() && !Password.IsNullOrEmpty();
+        }
     }
 }
