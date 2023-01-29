@@ -1,13 +1,25 @@
 @{
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
-
-<body>
-    <!-- create a sign-in page -->
-<nav>
-	<ul class="flex">
-        <li><a href="/auth/login" asp-controller="Auth" asp-action="Login">Login</a></li>
-        <li><a href="/auth/signup" asp-controller="Auth" asp-action="Signup">Signup</a></li>
-	</ul>
-</nav>
-</body>
+<main>
+<!-- Hero Section -->
+    <div id="carouselExampleSlidesOnly" class="carousel slide relative" data-bs-ride="carousel">
+        <div class="carousel-inner relative w-full overflow-hidden">
+            <div class="carousel-item active relative float-left w-full">
+                <img src="~/images/hero/hero-1.jpg"
+                     class="block w-full"
+                     alt="Wild Landscape" />
+            </div>
+            <div class="carousel-item relative float-left w-full">
+                <img src="~/images/hero/hero-2.jpg"
+                     class="block w-full"
+                     alt="Camera" />
+            </div>
+            <div class="carousel-item relative float-left w-full">
+                <img src="~/images/hero/hero-3.jpg"
+                     class="block w-full"
+                     alt="Exotic Fruits" />
+            </div>
+        </div>
+    </div>
+</main>

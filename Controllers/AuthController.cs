@@ -13,6 +13,7 @@ namespace esabzi.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.title = "E-Sabzi";
             //checks if header have bearer token
             if (Request.Headers.ContainsKey("Authorization"))
             {
@@ -24,6 +25,7 @@ namespace esabzi.Controllers
         }
         public IActionResult Login()
         {
+            ViewBag.title = "E-Sabzi";
             //checks if header have bearer token
             if (Request.Headers.ContainsKey("Authorization"))
             {

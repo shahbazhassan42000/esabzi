@@ -2,13 +2,69 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <!-- Rubik font -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <!-- Sora font -->
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- fontawesome css cdn -->
+    <link rel="stylesheet" href=" https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- tailwind css cdn -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
     <title>@ViewBag.Title</title>
+    <script src="~/js/main.js"></script>
+    <link href="~/css/icons.css" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
     <!-- axios cdn -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<body>
-    @RenderBody()
+<body class="font-['Sora'] relative min-h-screen">
+    <header class="flex px-20 items-center justify-between">
+        <div class="w-[200px]">
+            <a href="/home/index" asp-controller="Home" asp-action="Index">
+                <img class="object-fit py-2" src="~/images/logo_text.png" alt="logo" />
+            </a>
+        </div>
+        <nav>
+            <ul class="flex gap-2">
+                <li class="">
+                    <a class="block p-4 active-nav" href="/home/index" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li class="">
+                    <a class="block p-4 nav" href="/home/index" asp-controller="Home" asp-action="Index">Contact Us</a>
+                </li>
+                <li class="">
+                    <a class="block p-4 nav" href="/home/index" asp-controller="Home" asp-action="Index">About Us</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
     
+    @RenderBody()
+
+    <footer class="sm:mt-20 lg:mt-40">
+        <div class="flex justify-between sm:px-10 lg:px-20 py-10 relative">
+            <div class="self-end">
+                <ul class="sm:-mb-[40px] lg:-mb-[52px]">
+                    <li><a href="https://www.facebook.com/shahbazhassan42000/" target="_blank"></a></li>
+                    <li><a href="https://twitter.com/Shahbaz42000" target="_blank"></a></li>
+                    <li><a href="https://www.instagram.com/shahbaz_4311/" target="_blank"></a></li>
+                    <li><a href="https://www.linkedin.com/in/shahbaz43/" target="_blank"></a></li>
+                    <li><a href="https://wa.me/923354058294" target="_blank"></a></li>
+                    <li><a href="https://github.com/shahbazhassan42000" target="_blank"></a></li>
+                </ul>
+            </div>
+            <div class="text-center text-[#65707C] w-[250px] flex flex-col justify-center items-center">
+                <img class="rounded-[4px]" height="250" width="250" src="https://i.ibb.co/x3nt3dc/Shahbaz.jpg" alt="shahbaz profile">
+                <h3 class="text-[1.6rem] font-bold">Shahbaz</h3>
+                <p>I'm a passionate Coder and Lover at the same time😉.</p>
+            </div>
+        </div>
+        <p class="text-center py-1 border-t">© 2022 Shahbaz, Inc. All Rights Reserved.</p>
+    </footer>
 </body>
 </html>
