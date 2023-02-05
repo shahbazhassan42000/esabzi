@@ -2,6 +2,6 @@
 {
     public interface IIdentityModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
     }
 }

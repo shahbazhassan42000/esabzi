@@ -32,7 +32,7 @@ public partial class EsabziContext : DbContext
 
         foreach(var entry in tracker.Entries())
         {
-            if(entry.Entity is FullAuditModel)
+            if (entry.Entity is FullAuditModel)
             {
                 var referenceEntity = entry.Entity as FullAuditModel;
                 switch (entry.State)

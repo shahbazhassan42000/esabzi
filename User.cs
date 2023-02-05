@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace esabzi.Models;
+﻿namespace esabzi.Models;
 
 public partial class User:FullAuditModel
 {

@@ -1,16 +1,4 @@
 {
-  "Jwt": {
-    "Key": "$2a$11$Z1z0YAwuK/Iln4i2c/o93.vvBfvvx6wicVkcS9a1XFDMM4w/Inw9e",
-    "Issuer": "E-SABZI"
-  },
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:8080",
-      "sslPort": 0
-    }
-  },
   "profiles": {
     "esabzi": {
       "commandName": "Project",
@@ -19,14 +7,18 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:8080"
+      "applicationUrl": "http://localhost:8080",
+      "nativeDebugging": true,
+      "sqlDebugging": true
     },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "nativeDebugging": true,
+      "sqlDebugging": true
     },
     "WSL": {
       "commandName": "WSL2",
@@ -37,6 +29,18 @@
         "ASPNETCORE_URLS": "http://localhost:8080"
       },
       "distributionName": ""
+    }
+  },
+  "Jwt": {
+    "Key": "$2a$11$Z1z0YAwuK/Iln4i2c/o93.vvBfvvx6wicVkcS9a1XFDMM4w/Inw9e",
+    "Issuer": "E-SABZI"
+  },
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:8080",
+      "sslPort": 0
     }
   }
 }
