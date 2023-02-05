@@ -142,5 +142,29 @@ namespace esabzi.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
 
         }
+
+        //get user from claims
+        public User GetUserFromClaims(HttpContext context)
+        {
+            var token = context.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            if (!string.IsNullOrEmpty(token))
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var securityToken = handler.ReadToken(token) as JwtSecurityToken;
+                var usernameClaim = securityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var roleClaim = securityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+                if (usernameClaim != null && roleClaim != null)
+                {
+                    return new User
+                    {
+                        Username = usernameClaim.Value,
+                        Role = roleClaim.Value
+                    };
+                }
+
+            }
+            return new User();
+        }
+
     }
 }

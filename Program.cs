@@ -1,3 +1,4 @@
+using esabzi.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
@@ -46,6 +47,7 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 
+//set token from cookes to header
 app.Use(async (context, next) =>
 {
     var token = context.Request.Cookies["token"];
@@ -80,4 +82,9 @@ app.MapControllerRoute(
 
 
 app.Run();
+
+
+
+
+
 

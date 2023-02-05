@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -23,12 +24,22 @@ namespace esabzi.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedByUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Address", "ContactNo", "CreatedByUserId", "CreatedDate", "Email", "IsActive", "LastModifiedDate", "LastModifiedUserId", "Name", "Password", "Picture", "Role", "Username" },
+                values: new object[] { 1, "Street #3, House #22, near Data Darbar, Lahore", "+923354058294", "2fd28110-93d0-427d-9207-d55dbca680fa", new DateTime(2023, 2, 5, 17, 18, 3, 479, DateTimeKind.Local).AddTicks(2513), "shahbazhassan42000@gmail.com", true, null, null, "Shahbaz", "$2a$11$QXPhOYHeuAwKpQCdXma6peRytahY0CL2ADEqy.UDgrpT3bL34Kyma", "https://i.ibb.co/HYJWqBc/Whats-App-Image-2022-10-19-at-23-57-52.jpg", "Admin", "shahbaz" });
         }
 
         /// <inheritdoc />
