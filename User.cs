@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace esabzi.Models;
 
-public partial class User
+public partial class User:FullAuditModel
 {
     public int Id { get; set; }
 
@@ -22,4 +22,6 @@ public partial class User
     public string? Picture { get; set; }
 
     public string? Role { get; set; }
+
+    
 }
