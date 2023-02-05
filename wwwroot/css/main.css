@@ -37,3 +37,13 @@ body .primary-btn:active {
 .light-shadow{
     box-shadow:0 0 30px -2px rgba(0,0,0,0.35);
 }
+
+/*********************** HEADER *********************************/
+.active-nav{
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+}
+.nav:hover{
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+}
