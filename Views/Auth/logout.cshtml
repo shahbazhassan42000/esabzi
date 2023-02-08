@@ -1,0 +1,38 @@
+﻿@using esabzi.Models;
+@{
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+    User user = Model;
+}
+<div class="bg-[url('/images/logout_bg.gif')] h-screen flex w-screen items-center justify-center">
+    <!-- box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px; -->
+    <div class="relative light-shadow bg-white -ml-28 rounded p-[50px] pt-[80px] border-2 w-fit">
+        <!-- Logout box -->
+        <div class="bg-[#8bc543] absolute -right-8 -top-8 rounded rounded-br-[35px]">
+            <h1 class="text-white text-4xl p-5 pt-10 font-bold">LOGOUT</h1>
+        </div>
+        <!-- logout form -->
+        <form action="#" id="logout_form" class="relative flex flex-col items-center gap-10 pt-10" method="POST">
+            
+            <div class="flex space-x-3 items-center">
+                <div class="relative flex justify-center items-center py-2 w-[92px] h-[90px]">
+                    <img class="shadow-lg h-[90px] rounded-full align-middle border-none" src=@user.Picture alt="profile" />
+                </div>
+                <div class="flex flex-col">
+                    <p class="text-[#3E665C] mb-[7px] text-start font-bold text-2xl">@user.Name</p>
+                    <p class="text-[18px] text-[#7F99A2]">@user.Email</p>
+                </div>
+            </div>
+            <input class="primary-btn text-2xl font-bold" type="submit" id="logout_btn" value="Log Out">
+            <div>
+                Back to <a href="/" class="text-[#8bc543] hover:text-[#638c28] font-bold" asp-controller="Home" asp-action="Index">Home Page</a>
+            </div>
+            <!-- loading animation -->
+            <div id="loader" class="hidden backdrop-blur-sm w-full h-full absolute justify-center">
+                <div class="h-[200px]">
+                    <img src="~/images/loader.gif" alt="loading animation" class="h-full w-full object-fit">
+                </div>
+            </div>
+        </form>
+    </div>
+    
+</div>

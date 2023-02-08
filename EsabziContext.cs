@@ -19,7 +19,9 @@ public partial class EsabziContext : DbContext
     public DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ESABZI;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+     => optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ESABZI;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+    /*=> optionsBuilder.UseSqlServer("Server = sql_server2022; Database = esabzi; User Id = SA; Password = hum-2977;MultipleActiveResultSets=true");*/
+    /*=> optionsBuilder.UseSqlServer(@"Server = localhost, 1440; Database = master; User = sa; Password = Docker123!;");*/
 
     //setting logged in user
     private string _systemUserId = "2fd28110-93d0-427d-9207-d55dbca680fa";

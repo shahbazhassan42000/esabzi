@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using esabzi.DB;
 
@@ -11,9 +12,11 @@ using esabzi.DB;
 namespace esabzi.Migrations
 {
     [DbContext(typeof(EsabziContext))]
-    partial class EsabziContextModelSnapshot : ModelSnapshot
+    [Migration("20230206123151_add db container")]
+    partial class adddbcontainer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -3,6 +3,7 @@ window.addEventListener("load", () => {
     const usersURL = "api/user";
     const loginURL = 'login';
     const signupURL = 'users';
+    const EXPIRY_TIME = "2592000"; //30 Days
 
     const patterns = {
         email: /^([a-z\d]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/, contact: /^(\+92)(3)([0-9]{9})$/,
@@ -21,6 +22,7 @@ window.addEventListener("load", () => {
     const signup_form = document.getElementById("signup_form");
     const msg = document.getElementById("msg");
     const loader = document.getElementById("loader");
+    const logout_form = document.getElementById("logout_form");
 
     //login page functions
     if (login_form) {
@@ -48,7 +50,7 @@ window.addEventListener("load", () => {
                     console.log("response: ", res);
                 if (res.status === 200) {
                     //store in cookies
-                    document.cookie = `token=${res.data.token}`;
+                    document.cookie = `token=${res.data.token}; max-age=${EXPIRY_TIME}; path=/;`;
                     show_msg("Login successful", "success", 5000);
                     login_form.reset();
                     window.location.href = "/";
@@ -185,19 +187,40 @@ window.addEventListener("load", () => {
     }
 
 
-    //show-hide password button functionality
-    pwd_toggle_btn.addEventListener("click", () => {
-        if (password_inp.type === "password") {
-            password_inp.type = "text";
-            pwd_toggle_btn.classList.remove("fa-eye-slash");
-            pwd_toggle_btn.classList.add("fa-eye");
-        } else {
-            password_inp.type = "password";
-            pwd_toggle_btn.classList.remove("fa-eye");
-            pwd_toggle_btn.classList.add("fa-eye-slash");
+    if (login_form || signup_form) {
+        //show-hide password button functionality
+        pwd_toggle_btn.addEventListener("click", () => {
+            if (password_inp.type === "password") {
+                password_inp.type = "text";
+                pwd_toggle_btn.classList.remove("fa-eye-slash");
+                pwd_toggle_btn.classList.add("fa-eye");
+            } else {
+                password_inp.type = "password";
+                pwd_toggle_btn.classList.remove("fa-eye");
+                pwd_toggle_btn.classList.add("fa-eye-slash");
 
-        }
-    });
+            }
+        });
+    }
+
+
+    //logout button
+    if (logout_form) {
+        logout_form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            //remove token and user from cookies
+            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+            //redirect to login page
+            window.location.href = "/auth/login";
+
+
+
+        });
+
+
+    }
 
     //display message for given time
     const show_msg = (message, type, time) => {
