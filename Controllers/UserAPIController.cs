@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using esabzi.Models.Repositories;
 using esabzi.Utils;
+using esabzi.Models.Interfaces;
 
 namespace esabzi.Controllers
 {
@@ -14,15 +15,13 @@ namespace esabzi.Controllers
     [ApiController]
     public class UserAPIController : ControllerBase
     {
-        private MainRepository repository;
-        private readonly EsabziContext _context;
+        private readonly IRepo repository;
         private readonly IConfiguration _config;
 
-        public UserAPIController(IConfiguration config)
+        public UserAPIController(IConfiguration config, IRepo repo)
         {
-            _context = new EsabziContext();
             _config = config;
-            repository = new MainRepository(_context, _config);
+            repository = repo;
         }
 
 
@@ -110,13 +109,21 @@ namespace esabzi.Controllers
             }
         }
 
-        //Update profile
+        //update user address
+        [Authorize]
+        [HttpPatch("address/{id}")]
+        public ActionResult UpdateAddress(int id, [FromBody] string address)
+        {
+            int status = repository.updateAddress(id, address);
+            return status == 1 ? Ok("Address updated successfully!!!") : NotFound("User not found");
+        }
+        
+        //Update profile picture
         [Authorize]
         [HttpPatch("{id}")]
         public ActionResult UpdateProfile(int id, [FromBody] string image)
         {
             //print image
-            System.Diagnostics.Debug.WriteLine(image);
             int status = repository.updateProfile(id, image);
             return status == 1 ? Ok("Profile picture updated successfully!!!") : NotFound("User not found");
         }

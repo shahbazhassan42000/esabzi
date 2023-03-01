@@ -12,17 +12,22 @@
                        type="file" accept="image/jpeg, image/jpg, image/png" required />
                 <div class="mb-5 flex flex-col justify-center items-center rounded-[12px] max-h-[300px] relative">
                     <div class="mx-auto w-64 text-center ">
-                      <div class="relative w-64">
-                      <img id="user_profile_picture" class="w-64 rounded-[12px] absolute" src=@user.Picture alt="" />
-                      <div id="update_profile_btn" class="w-64 h-64 group hover:bg-gray-200 opacity-60 rounded-[12px] absolute flex justify-center items-center cursor-pointer transition duration-500">
-                        <img class="hidden object-fill group-hover:block w-12" src="https://www.svgrepo.com/show/33565/upload.svg" alt="" />
-                      </div>
-                      </div>
+                        <div class="relative w-64">
+                            <div class="w-64 h-64 rounded-[12px] absolute flex justify-center items-center">
+                                <img id="user_profile_picture" class="object-cover h-full w-full" src=@user.Picture alt="profile picture" />
+                            </div>
+                            <div id="update_profile_btn" class="w-64 h-64 group hover:bg-gray-200 opacity-60 rounded-[12px] absolute flex justify-center items-center cursor-pointer transition duration-500">
+                                <img class="hidden object-fill group-hover:block w-12" src="https://www.svgrepo.com/show/33565/upload.svg" alt="profile picture hover effect image" />
+                            </div>
+                            <div id="update_profile_loader" class="hidden w-64 h-64 group opacity-60 rounded-[12px] absolute flex justify-center items-center transition duration-500">
+                                <img class="object-fill" src="~/images/loader.gif" alt="profile picture loading gif" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div class="flex flex-col font-bold text-[#172B4D] space-y-5">
+            <div class="flex flex-col font-bold text-[#172B4D] space-y-5 relative">
                 <h2 class="text-2xl mb-5 text-center">User Information</h2>
                 <div class="flex items-center">
                     <h3 class="w-[150px] text-[20px]">ID: </h3>
@@ -36,9 +41,30 @@
                     <h3 class="w-[150px] text-[20px]">Email: </h3>
                     <p>@user.Email</p>
                 </div>
+                <div class="flex items-center">
+                    <h3 class="w-[150px] text-[20px]">Contact: </h3>
+                    <p>@user.ContactNo</p>
+                </div>
+                <div class="flex items-center">
+                    <h3 class="w-[150px] text-[20px]">Address: </h3>
+                    <textarea id="user_address" rows="3" cols="50" class="p-[5px] resize-none rounded-[4px] border border-[#172B4D]">@user.Address</textarea>
+                </div>
+                <button id="update_btn" class="primary-btn mx-auto">Update Profile</button>  
+                <!-- loading animation -->
+                <div id="loader" class="hidden backdrop-blur-sm w-full h-full absolute justify-center items-center">
+                    <div class="h-[200px]">
+                        <img src="~/images/loader.gif" alt="loading animation" class="h-full w-full object-fit">
+                    </div>
+                </div>
+                <!-- popup message -->
+                <div id="msg" class="hidden absolute backdrop-blur-sm top-[120px] w-full justify-center items-center">
+                    <h2 class="px-[20px] py-[30px] bg-[#ffc700] text-[#172B4D] mx-auto rounded-[4px] border border-[#172B4D]"></h2>
+                </div>
+                
             </div>
+
         </div>
-        <div></div>
+        
     </div>
 </main>
 @section Scripts {

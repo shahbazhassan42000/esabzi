@@ -1,14 +1,13 @@
-﻿namespace esabzi.Models.Repositories
+﻿using esabzi.Models.Interfaces;
+namespace esabzi.Models.Repositories
 {
-    public class MainRepository
+    public class MainRepository: IRepo
     {
         private readonly EsabziContext _context;
-        private readonly IConfiguration _config;
 
-        public MainRepository(EsabziContext context, IConfiguration config)
+        public MainRepository()
         {
             _context = new EsabziContext();
-            _config = config;
         }
 
         //get all users minimal information
@@ -49,9 +48,20 @@
         //returns -1 if user not found against the given id
         public int updateProfile(int id, string url)
         {
-            User user = _context.Users.Where(u => u.Id == id).FirstOrDefault();
+            User user = getUserById(id);
             if (user == null) return -1;
             user.Picture = url;
+            _context.SaveChanges();
+            return 1;
+        }
+
+        //returns 1 if address upadated successfully,
+        //returns -1 if user not found against the given id
+        public int updateAddress(int id, string address)
+        {
+            User user = getUserById(id);
+            if (user == null) return -1;
+            user.Address = address;
             _context.SaveChanges();
             return 1;
         }

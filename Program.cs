@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
 using System.Text;
+using esabzi.Models.Interfaces;
+using esabzi.Models.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IConfiguration>(new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", true, true)
     .Build());
+
+//Dependency Injection
+builder.Services.AddScoped<IRepo, MainRepository>();
+
 
 //builder.Services.AddAuthentication()
 //    .AddCookie(options =>
