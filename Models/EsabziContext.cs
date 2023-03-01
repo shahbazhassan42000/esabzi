@@ -63,10 +63,6 @@ public partial class EsabziContext : DbContext
 
         base.OnModelCreating(modelBuilder);
 
-        // Add any custom configurations for the entities here
-        modelBuilder.Entity<User>().Property(u => u.Picture).HasDefaultValue("https://i.ibb.co/cT5mM2Z/profile-img.png");
-        modelBuilder.Entity<User>().Property(u => u.Role).HasDefaultValue("CUSTOMER");
-
         User user = new User
         {
             Id = 1,

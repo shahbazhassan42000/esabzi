@@ -110,9 +110,19 @@ namespace esabzi.Controllers
             }
         }
 
+        //Update profile
+        [Authorize]
+        [HttpPatch("{id}")]
+        public ActionResult UpdateProfile(int id, [FromBody] string image)
+        {
+            //print image
+            System.Diagnostics.Debug.WriteLine(image);
+            int status = repository.updateProfile(id, image);
+            return status == 1 ? Ok("Profile picture updated successfully!!!") : NotFound("User not found");
+        }
         //USER UPDATE
         [Authorize]
-        [HttpPut("Update")]
+        [HttpPut]
         public ActionResult Update([FromBody] User user)
         {
             return Ok("user updated successfully!!!");
