@@ -156,7 +156,7 @@ window.addEventListener("load", () => {
             const Password = password_inp.value;
             const Address = address_inp.value;
             const data = {
-                Name, Email, ContactNo, Username, Password, Address, Role:"CUSTOMER"
+                Name, Email, ContactNo, Username, Password, Address
             };
             signup_btn.disabled = true;
             loader.style.display = "flex";

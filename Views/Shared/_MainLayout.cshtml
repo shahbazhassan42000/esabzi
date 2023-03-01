@@ -37,7 +37,7 @@
                 <li class="">
                     <a class="block p-4 active-nav" href="/home/index" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
-                <li class="">
+                <li>
                     <a class="block p-4 nav" href="/home/index" asp-controller="Home" asp-action="Index">Contact Us</a>
                 </li>
                 <li class="">
@@ -68,9 +68,9 @@
                         </div>
 
                         <div class="flex flex-col space-y-2 mx-4 border-b border-b-[#091e4221] pb-3">
-                            <button class="text-[#172b4d] -mx-4 px-4  text-[14px] text-start py-1 hover:bg-[#091e420a]">
+                            <a href="/user/profile" asp-action="Profile" asp-controller="User" class="text-[#172b4d] -mx-4 px-4  text-[14px] text-start py-1 hover:bg-[#091e420a]">
                                 Profile Setting
-                            </button>
+                            </a>
                         </div>
 
                         <div class="flex flex-col space-y-2x">
@@ -86,7 +86,6 @@
     </header>
     
     @RenderBody()
-
     <footer class="sm:mt-20 lg:mt-40">
         <div class="flex justify-between sm:px-10 lg:px-20 py-10 relative">
             <div class="self-end">
@@ -107,5 +106,6 @@
         </div>
         <p class="text-center py-1 border-t">© 2022 Shahbaz, Inc. All Rights Reserved.</p>
     </footer>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -71,7 +71,7 @@ namespace esabzi.Controllers
             }
         }
 
-        ////login route
+        //login route
         [AllowAnonymous]
         [HttpPost("Login")]
         public ActionResult Login([FromBody] User user)
@@ -111,6 +111,53 @@ namespace esabzi.Controllers
             }
         }
 
+        //USER UPDATE
+        [Authorize]
+        [HttpPut("Update")]
+        public ActionResult Update([FromBody] User user)
+        {
+            return Ok("user updated successfully!!!");
+            //if (user.ValidateUpdate())
+            //{
+            //    //get user from cookies
+            //    User userFromCookies = CookieHelper.GetCookie<User>(Request, "user");
+            //    //check if user exists
+            //    User? userExists = repository.getUserByUsername(userFromCookies);
+            //    if (userExists != null)
+            //    {
+            //        //compare password
+            //        if (userExists.ComparePassword(user.Password))
+            //        {
+            //            //update user
+            //            userExists.Name = user.Name;
+            //            userExists.Email = user.Email;
+            //            userExists.Phone = user.Phone;
+            //            userExists.Address = user.Address;
+            //            userExists.City = user.City;
+            //            userExists.Country = user.Country;
+            //            userExists.Zip = user.Zip;
+            //            //save changes
+            //            _context.SaveChanges();
+            //            //set user object in cookies
+            //            CookieHelper.SetCookie(Response, "user", userExists);
+            //            return Ok("User updated successfully");
+            //        }
+            //        else
+            //        {
+            //            return NotFound("Invalid Password");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        return NotFound("User not found");
+            //    }
+            //}
+            //else
+            //{
+            //    //send error 422 with a message
+            //    return UnprocessableEntity("Please fill all the fields");
+            //}
+        }
 
         //generate JWT token
         public string GenerateJWT(User user)
