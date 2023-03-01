@@ -1,20 +1,13 @@
-﻿using esabzi.Models;
-using esabzi.Models.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System.Runtime.Intrinsics.X86;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace esabzi.DB;
+namespace esabzi.Models;
 
 public partial class EsabziContext : DbContext
 {
-    public EsabziContext()
-    {
-    }
+    public EsabziContext(){}
 
     public EsabziContext(DbContextOptions<EsabziContext> options)
-        : base(options)
-    {
-    }
+        : base(options){}
 
     public DbSet<User> Users { get; set; }
 
@@ -28,11 +21,11 @@ public partial class EsabziContext : DbContext
     private string _loggedInUserId = "e2eb8989-a81a-4151-8e86-eb95a7961da2";
 
     //overriding SaveChanges to inject change tracking
-    public override int SaveChanges() 
+    public override int SaveChanges()
     {
         var tracker = ChangeTracker;
 
-        foreach(var entry in tracker.Entries())
+        foreach (var entry in tracker.Entries())
         {
             if (entry.Entity is FullAuditModel)
             {
@@ -42,7 +35,7 @@ public partial class EsabziContext : DbContext
                     case EntityState.Added:
                         referenceEntity.CreatedDate = DateTime.Now;
                         referenceEntity.IsActive = true;
-                        
+
                         if (string.IsNullOrWhiteSpace(referenceEntity.CreatedByUserId))
                         {
                             referenceEntity.CreatedByUserId = _systemUserId;
@@ -59,22 +52,29 @@ public partial class EsabziContext : DbContext
                     default:
                         break;
                 }
-                
+
             }
         }
-        return base.SaveChanges(); 
+        return base.SaveChanges();
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        base.OnModelCreating(modelBuilder);
+
+        // Add any custom configurations for the entities here
+        modelBuilder.Entity<User>().Property(u => u.Picture).HasDefaultValue("https://i.ibb.co/cT5mM2Z/profile-img.png");
+        modelBuilder.Entity<User>().Property(u => u.Role).HasDefaultValue("CUSTOMER");
+
         User user = new User
         {
             Id = 1,
-            Name="Shahbaz",
-            Email="shahbazhassan42000@gmail.com",
-            ContactNo="+923354058294",
+            Name = "Shahbaz",
+            Email = "shahbazhassan42000@gmail.com",
+            ContactNo = "+923354058294",
             Username = "shahbaz",
-            Password ="hum-2977",
+            Password = "hum-2977",
             Address = "Street #3, House #22, near Data Darbar, Lahore",
             Picture = "https://i.ibb.co/HYJWqBc/Whats-App-Image-2022-10-19-at-23-57-52.jpg",
             Role = "ADMIN",
@@ -84,10 +84,8 @@ public partial class EsabziContext : DbContext
 
         };
         user.EncryptPassword();
-        
+
         modelBuilder.Entity<User>().HasData(user);
     }
 
-
-        
 }

@@ -1,6 +1,4 @@
-﻿using esabzi.DB;
-
-namespace esabzi.Models.Repositories
+﻿namespace esabzi.Models.Repositories
 {
     public class MainRepository
     {

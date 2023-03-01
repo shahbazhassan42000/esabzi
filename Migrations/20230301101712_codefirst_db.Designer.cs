@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using esabzi.DB;
+using esabzi.Models;
 
 #nullable disable
 
 namespace esabzi.Migrations
 {
     [DbContext(typeof(EsabziContext))]
-    [Migration("20230205121804_created db_schema")]
-    partial class createddbschema
+    [Migration("20230301101712_codefirst_db")]
+    partial class codefirstdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,16 +40,15 @@ namespace esabzi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedByUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModifiedDate")
@@ -66,10 +65,14 @@ namespace esabzi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Picture")
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("https://i.ibb.co/cT5mM2Z/profile-img.png");
 
                     b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("CUSTOMER");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -86,13 +89,13 @@ namespace esabzi.Migrations
                             Address = "Street #3, House #22, near Data Darbar, Lahore",
                             ContactNo = "+923354058294",
                             CreatedByUserId = "2fd28110-93d0-427d-9207-d55dbca680fa",
-                            CreatedDate = new DateTime(2023, 2, 5, 17, 18, 3, 479, DateTimeKind.Local).AddTicks(2513),
+                            CreatedDate = new DateTime(2023, 3, 1, 15, 17, 12, 300, DateTimeKind.Local).AddTicks(7890),
                             Email = "shahbazhassan42000@gmail.com",
                             IsActive = true,
                             Name = "Shahbaz",
-                            Password = "$2a$11$QXPhOYHeuAwKpQCdXma6peRytahY0CL2ADEqy.UDgrpT3bL34Kyma",
+                            Password = "$2a$11$DcSDoIIiZ9TFxcnUurrBg.UGa0SJGdBCxLIJE.GLcxg5hMIirYZdq",
                             Picture = "https://i.ibb.co/HYJWqBc/Whats-App-Image-2022-10-19-at-23-57-52.jpg",
-                            Role = "Admin",
+                            Role = "ADMIN",
                             Username = "shahbaz"
                         });
                 });

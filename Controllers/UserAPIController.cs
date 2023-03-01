@@ -1,5 +1,4 @@
-﻿using esabzi.DB;
-using esabzi.Models;
+﻿using esabzi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
